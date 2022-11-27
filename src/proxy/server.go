@@ -7,7 +7,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 
-	"github.com/medinvention/loki-auth-proxy/src/pkg"
+	"github.com/mmohamed/loki-auth-proxy/src/pkg"
 	"github.com/urfave/cli"
 )
 

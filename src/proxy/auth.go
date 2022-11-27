@@ -5,7 +5,7 @@ import (
 	"crypto/subtle"
 	"net/http"
 
-	"github.com/medinvention/loki-auth-proxy/src/pkg"
+	"github.com/mmohamed/loki-auth-proxy/src/pkg"
 )
 
 type key int

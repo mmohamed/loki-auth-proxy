@@ -5,7 +5,7 @@ ARG VERSION=dev
 ENV GO111MODULE=on
 ENV CGO_ENABLED=0
 
-ENV SRC_PATH=github.com/medinvention/loki-auth-proxy
+ENV SRC_PATH=github.com/mmohamed/loki-auth-proxy
 
 RUN apk add  -U --no-cache git ca-certificates && \
     mkdir -p /go/src/${SRC_PATH}
@@ -22,7 +22,7 @@ RUN cd src/cmd && \
 
 FROM scratch
 
-ENV SRC_PATH=github.com/medinvention/loki-auth-proxy
+ENV SRC_PATH=github.com/mmohamed/loki-auth-proxy
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/src/${SRC_PATH}/build/proxy /proxy

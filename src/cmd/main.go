@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	proxy "github.com/medinvention/loki-auth-proxy/src/proxy"
+	proxy "github.com/mmohamed/loki-auth-proxy/src/proxy"
 	"github.com/urfave/cli"
 )
 
@@ -16,7 +16,7 @@ func main() {
 	app.Name = "Loki Authentication Proxy"
 	app.Version = version
 	app.Authors = []cli.Author{
-		{Name: "MedInvention", Email: "contact@medinvention.io"},
+		{Name: "Marouan MOHAMED", Email: "medmarouen@gmail.com"},
 	}
 	app.Commands = []cli.Command{
 		{

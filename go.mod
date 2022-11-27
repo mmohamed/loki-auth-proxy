@@ -1,4 +1,4 @@
-module github.com/medinvention/loki-auth-proxy
+module github.com/mmohamed/loki-auth-proxy
 
 go 1.12
 
