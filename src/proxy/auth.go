@@ -32,8 +32,9 @@ func BasicAuth(handler http.HandlerFunc, authConfig *pkg.Authn, orgCheck bool) h
 func isAuthorized(user string, pass string, authConfig *pkg.Authn, orgCheck bool, requestOrgID string) (bool, string) {
 	for _, v := range authConfig.Users {
 		if subtle.ConstantTimeCompare([]byte(user), []byte(v.Username)) == 1 && subtle.ConstantTimeCompare([]byte(pass), []byte(v.Password)) == 1 {
-			if orgCheck && subtle.ConstantTimeCompare([]byte(requestOrgID), []byte(v.OrgID)) == 1 {
-				return true, v.OrgID
+			if orgCheck && (subtle.ConstantTimeCompare([]byte(requestOrgID), []byte(v.OrgID)) == 1 || subtle.ConstantTimeCompare([]byte("*"), []byte(v.OrgID)) == 1) {
+				//  is orgCheck is activated and an account with "*" configured as OrgID, the request orgID will be sended to Loki
+				return true, requestOrgID
 			} else if !orgCheck {
 				return true, v.OrgID
 			}
