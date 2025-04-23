@@ -16,7 +16,18 @@ func Serve(c *cli.Context) error {
 	serveAt := fmt.Sprintf(":%d", c.Int("port"))
 	authConfigLocation := c.String("auth-config")
 	orgCheck := c.Bool("org-check")
-	authConfig, _ := pkg.ParseConfig(&authConfigLocation)
+	authConfig, err := pkg.ParseConfig(&authConfigLocation)
+	
+	log.Printf("Loki multi tenant proxy is starting for %s on port %d ...", c.String("loki-server"), c.Int("port"))
+
+	if authConfig == nil {
+		log.Fatalf("Starting failed, unable to load auth-config file : %v", err)
+		return err
+	}
+
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "OK")
+	})
 
 	http.HandleFunc("/", createHandler(lokiServerURL, authConfig, orgCheck))
 	if err := http.ListenAndServe(serveAt, nil); err != nil {
